@@ -65,7 +65,16 @@ public class App {
 
         switch (opcion) {
             case 1: {
-                //registrar desktops
+                Desktop d = new Desktop();
+                d.fabricante = JOptionPane.showInputDialog("Fabricante:");
+                d.modelo = JOptionPane.showInputDialog("Modelo:");
+                d.microprocesador = JOptionPane.showInputDialog("Microprocesador:");
+                d.memoria = JOptionPane.showInputDialog("Memoria:");
+                d.tarjetaGrafica = JOptionPane.showInputDialog("Tarjeta gráfica:");
+                d.tamanoTorre = JOptionPane.showInputDialog("Tamaño de torre:");
+                d.capacidadDisco = JOptionPane.showInputDialog("Capacidad de disco:");
+                desktops.add(d);
+                break;
             }
             case 2: {
                 //registrar laptops
@@ -107,7 +116,17 @@ public class App {
 
         switch (opcion) {
             case 1:
-               //listar desktops
+                sb.append("=== DESKTOPS ===\n");
+                for (Desktop d : desktops) {
+                    sb.append("Fabricante: ").append(d.fabricante).append("\n")
+                            .append("Modelo: ").append(d.modelo).append("\n")
+                            .append("Microprocesador: ").append(d.microprocesador).append("\n")
+                            .append("Memoria: ").append(d.memoria).append("\n")
+                            .append("Tarjeta gráfica: ").append(d.tarjetaGrafica).append("\n")
+                            .append("Tamaño de torre: ").append(d.tamanoTorre).append("\n")
+                            .append("Capacidad de disco: ").append(d.capacidadDisco).append("\n")
+                            .append("----------------------------\n");
+                }
                 break;
             case 2:
                 //listar laptops
