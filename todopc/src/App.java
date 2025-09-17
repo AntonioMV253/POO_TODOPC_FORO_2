@@ -78,6 +78,26 @@ public class App {
 //                t.modelo = JOptionPane.showInputDialog("Modelo:");
 //                t.microprocesador = JOptionPane.showInputDialog("Microprocesador:");
 
+                String Tabletfabricante = JOptionPane.showInputDialog("Fabricante:");
+                String Tabletmodelo = JOptionPane.showInputDialog("Modelo: ");
+                String Tabletmicroprocesador = JOptionPane.showInputDialog("Microprocesador: ");
+                String Tabletmemoria = JOptionPane.showInputDialog("Memoria: ");
+                String tamanoMemoriaNAND = JOptionPane.showInputDialog("Tamanio de memoria NAND:");
+                String TabletTamanoDiagonal = JOptionPane.showInputDialog("Tamanio diagonal de la pantalla:");
+
+                Object[] tiposPantalla = TipoPantalla.values();
+                TipoPantalla tipoPantalla = (TipoPantalla) JOptionPane.showInputDialog(null, "Seleccione tipo de pantalla: ", "Tipo de pantalla", JOptionPane.QUESTION_MESSAGE, null, tiposPantalla, tiposPantalla[0]);
+
+                
+                Object[] sistemasOperativos = SistemaOperativo.values();
+                SistemaOperativo sistemaOperativo =(SistemaOperativo) JOptionPane.showInputDialog(null, "Seleccione el sistema operativo", "Sistema Operativo", JOptionPane.QUESTION_MESSAGE, null, sistemasOperativos, sistemasOperativos[0]);
+
+                Tablet nuevaTablet = new Tablet(Tabletfabricante, Tabletmodelo, Tabletmicroprocesador, Tabletmemoria, TabletTamanoDiagonal, tipoPantalla, tamanoMemoriaNAND, sistemaOperativo);
+
+                tablets.add(nuevaTablet);
+
+                JOptionPane.showMessageDialog(null,"Table agregada");
+
                 break;
             }
             default:
@@ -115,6 +135,26 @@ public class App {
                 break;
             case 3:
                 //listar tablets
+
+                if(tablets.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "No hay tablets en la lista");
+                } else{
+                    StringBuilder cout = new StringBuilder();
+
+                    for(int i = 0; i<tablets.size(); i++){
+                        Tablet t  = tablets.get(i);
+                        cout.append("Tablet").append("\n");
+                        cout.append("Fabricante:").append(t.fabricante).append("\n");
+                        cout.append("Modelo:").append(t.modelo).append("\n");
+                        cout.append("Microprocesador:").append(t.microprocesador).append("\n");
+                        cout.append("Memoria:").append(t.memoria).append("\n");
+                        cout.append("Tamanio diagonal:").append(t.tamanoDiagonal).append("\n");
+                        cout.append("Tipo pantalla:").append(t.tipoPantalla).append("\n");
+                        cout.append("Memoria NAND:").append(t.tamanoMemoriaNAND).append("\n");
+                        cout.append("Sistema operativo:").append(t.sistemaOperativo).append("\n");
+                    }
+                    JOptionPane.showMessageDialog(null, cout.toString());
+                }
 
                 break;
             default:
