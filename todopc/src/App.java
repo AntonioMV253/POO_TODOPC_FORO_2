@@ -89,7 +89,7 @@ public class App {
 
                 String Tabletfabricante = JOptionPane.showInputDialog("Fabricante:");
                 String Tabletmodelo = JOptionPane.showInputDialog("Modelo: ");
-                String Tabletmicroprocesador = JOptionPane.showInputDialog("Microprocesador: ");
+                String Tabletmicroprocesador = JOptionPane.showInputDialog("Microprocesador:");
                 String Tabletmemoria = JOptionPane.showInputDialog("Memoria: ");
                 String tamanoMemoriaNAND = JOptionPane.showInputDialog("Tamanio de memoria NAND:");
                 String TabletTamanoDiagonal = JOptionPane.showInputDialog("Tamanio diagonal de la pantalla:");
