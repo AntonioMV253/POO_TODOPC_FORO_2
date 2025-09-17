@@ -1,5 +1,5 @@
 public class Laptop extends Equipo {
     public String memoria;
     public String tamanoPantalla;
-    public String capacidadDisco;
+    public String capacidadDisco; //comentarios de prueba
 }
