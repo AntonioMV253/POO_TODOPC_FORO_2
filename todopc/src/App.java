@@ -66,50 +66,78 @@ public class App {
         switch (opcion) {
             case 1: {
                 Desktop d = new Desktop();
-                d.fabricante = JOptionPane.showInputDialog("Fabricante:");
-                d.modelo = JOptionPane.showInputDialog("Modelo:");
-                d.microprocesador = JOptionPane.showInputDialog("Microprocesador:");
-                d.memoria = JOptionPane.showInputDialog("Memoria:");
-                d.tarjetaGrafica = JOptionPane.showInputDialog("Tarjeta gráfica:");
-                d.tamanoTorre = JOptionPane.showInputDialog("Tamaño de torre:");
-                d.capacidadDisco = JOptionPane.showInputDialog("Capacidad de disco:");
+                d.fabricante = solicitarTextoNoVacio("Fabricante:");
+                d.modelo = solicitarTextoNoVacio("Modelo:");
+                d.microprocesador = solicitarTextoNoVacio("Microprocesador:");
+                d.memoria = solicitarTextoNoVacio("Memoria:");
+                d.tarjetaGrafica = solicitarTextoNoVacio("Tarjeta gráfica:");
+                d.tamanoTorre = solicitarTextoNoVacio("Tamaño de torre:");
+                d.capacidadDisco = solicitarTextoNoVacio("Capacidad de disco:");
                 desktops.add(d);
+                JOptionPane.showMessageDialog(null, "Desktop registrada correctamente.");
                 break;
             }
             case 2: {
-                //registrar laptops
-
-            }
-            case 3: {
-                //Registrar tables ejemplo de como hacerlo (Acá toca validar si es capacitiva o resistiva con el enum de tipo de pantalla)
-//                Tablet t = new Tablet();
-//                t.fabricante = JOptionPane.showInputDialog("Fabricante:");
-//                t.modelo = JOptionPane.showInputDialog("Modelo:");
-//                t.microprocesador = JOptionPane.showInputDialog("Microprocesador:");
-
-                String Tabletfabricante = JOptionPane.showInputDialog("Fabricante:");
-                String Tabletmodelo = JOptionPane.showInputDialog("Modelo: ");
-                String Tabletmicroprocesador = JOptionPane.showInputDialog("Microprocesador:");
-                String Tabletmemoria = JOptionPane.showInputDialog("Memoria: ");
-                String tamanoMemoriaNAND = JOptionPane.showInputDialog("Tamanio de memoria NAND:");
-                String TabletTamanoDiagonal = JOptionPane.showInputDialog("Tamanio diagonal de la pantalla:");
-
-                Object[] tiposPantalla = TipoPantalla.values();
-                TipoPantalla tipoPantalla = (TipoPantalla) JOptionPane.showInputDialog(null, "Seleccione tipo de pantalla: ", "Tipo de pantalla", JOptionPane.QUESTION_MESSAGE, null, tiposPantalla, tiposPantalla[0]);
-
-                
-                Object[] sistemasOperativos = SistemaOperativo.values();
-                SistemaOperativo sistemaOperativo =(SistemaOperativo) JOptionPane.showInputDialog(null, "Seleccione el sistema operativo", "Sistema Operativo", JOptionPane.QUESTION_MESSAGE, null, sistemasOperativos, sistemasOperativos[0]);
-
-                Tablet nuevaTablet = new Tablet(Tabletfabricante, Tabletmodelo, Tabletmicroprocesador, Tabletmemoria, TabletTamanoDiagonal, tipoPantalla, tamanoMemoriaNAND, sistemaOperativo);
-
-                tablets.add(nuevaTablet);
-
-                JOptionPane.showMessageDialog(null,"Table agregada");
-
+                Laptop l = new Laptop();
+                l.fabricante = solicitarTextoNoVacio("Fabricante:");
+                l.modelo = solicitarTextoNoVacio("Modelo:");
+                l.microprocesador = solicitarTextoNoVacio("Microprocesador:");
+                l.memoria = solicitarTextoNoVacio("Memoria:");
+                l.tamanoPantalla = solicitarTextoNoVacio("Tamaño de pantalla:");
+                l.capacidadDisco = solicitarTextoNoVacio("Capacidad de disco:");
+                laptops.add(l);
+                JOptionPane.showMessageDialog(null, "Laptop registrada correctamente.");
                 break;
             }
-            default:
+            case 3: {
+                    Tablet t = new Tablet();
+
+                    // Solicitar datos básicos
+                    t.fabricante = solicitarTextoNoVacio("Fabricante:");
+                    t.modelo = solicitarTextoNoVacio("Modelo:");
+                    t.microprocesador = solicitarTextoNoVacio("Microprocesador:");
+                    t.tamanoDiagonal = solicitarTextoNoVacio("Tamaño diagonal de pantalla:");
+
+                    // Validar tipo de pantalla con enum
+                    TipoPantalla tipoPantalla = null;
+                    do {
+                        String inputPantalla = JOptionPane.showInputDialog(
+                                "Tipo de pantalla (CAPACITIVA o RESISTIVA):"
+                        );
+                        if (inputPantalla == null) break; // Cancelar registro
+                        try {
+                            tipoPantalla = TipoPantalla.valueOf(inputPantalla.toUpperCase());
+                        } catch (IllegalArgumentException e) {
+                            JOptionPane.showMessageDialog(null, "Tipo de pantalla no válido. Intenta nuevamente.");
+                        }
+                    } while (tipoPantalla == null);
+                    t.tipoPantalla = tipoPantalla;
+
+                    // Tamaño memoria NAND
+                    t.tamanoMemoriaNAND = solicitarTextoNoVacio("Tamaño memoria NAND:");
+
+                    // Selección de Sistema Operativo usando enum
+                    String[] opcionesSO = new String[SistemaOperativo.values().length];
+                    for (int i = 0; i < SistemaOperativo.values().length; i++) {
+                        opcionesSO[i] = SistemaOperativo.values()[i].name();
+                    }
+                    String seleccionSO = (String) JOptionPane.showInputDialog(
+                            null,
+                            "Selecciona Sistema Operativo:",
+                            "Sistema Operativo",
+                            JOptionPane.QUESTION_MESSAGE,
+                            null,
+                            opcionesSO,
+                            opcionesSO[0]
+                    );
+                    t.sistemaOperativo = seleccionSO != null ? SistemaOperativo.valueOf(seleccionSO) : SistemaOperativo.ANDROID;
+
+                    // Agregar a la lista de tablets
+                    tablets.add(t);
+                    JOptionPane.showMessageDialog(null, "Tablet registrada correctamente.");
+                    break;
+                }
+
                 JOptionPane.showMessageDialog(null, "Opción no válida");
         }
     }
@@ -148,34 +176,20 @@ public class App {
                             .append("----------------------------\n");
                 }
                 break;
+
             case 2:
-                //listar laptops
-
-                break;
-            case 3:
-                //listar tablets
-
-                if(tablets.isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "No hay tablets en la lista");
-                } else{
-                    StringBuilder cout = new StringBuilder();
-
-                    for(int i = 0; i<tablets.size(); i++){
-                        Tablet t  = tablets.get(i);
-                        cout.append("Tablet").append("\n");
-                        cout.append("Fabricante:").append(t.fabricante).append("\n");
-                        cout.append("Modelo:").append(t.modelo).append("\n");
-                        cout.append("Microprocesador:").append(t.microprocesador).append("\n");
-                        cout.append("Memoria:").append(t.memoria).append("\n");
-                        cout.append("Tamanio diagonal:").append(t.tamanoDiagonal).append("\n");
-                        cout.append("Tipo pantalla:").append(t.tipoPantalla).append("\n");
-                        cout.append("Memoria NAND:").append(t.tamanoMemoriaNAND).append("\n");
-                        cout.append("Sistema operativo:").append(t.sistemaOperativo).append("\n");
-                    }
-                    JOptionPane.showMessageDialog(null, cout.toString());
+                sb.append("=== LAPTOPS ===\n");
+                for (Laptop l : laptops) {
+                    sb.append("Fabricante: ").append(l.fabricante).append("\n")
+                            .append("Modelo: ").append(l.modelo).append("\n")
+                            .append("Microprocesador: ").append(l.microprocesador).append("\n")
+                            .append("Memoria: ").append(l.memoria).append("\n")
+                            .append("Tamaño pantalla: ").append(l.tamanoPantalla).append("\n")
+                            .append("Capacidad de disco: ").append(l.capacidadDisco).append("\n")
+                            .append("----------------------------\n");
                 }
-
                 break;
+
             default:
                 JOptionPane.showMessageDialog(null, "Opción no válida");
         }
@@ -185,5 +199,16 @@ public class App {
         } else {
             JOptionPane.showMessageDialog(null, sb.toString());
         }
+    }
+    private static String solicitarTextoNoVacio(String mensaje) {
+        String input;
+            input = JOptionPane.showInputDialog(mensaje); // pedir valor
+            if (input == null) { // si presiona Cancelar
+                return  "No brindado"; // interrumpe el registro
+            }
+            if (input.trim().isEmpty()) { // si deja vacío o espacios
+               return  "No brindado";
+            }
+        return input; // devuelve valor válido
     }
 }
