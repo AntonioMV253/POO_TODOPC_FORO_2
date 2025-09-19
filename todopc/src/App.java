@@ -66,13 +66,13 @@ public class App {
         switch (opcion) {
             case 1: {
                 Desktop d = new Desktop();
-                d.fabricante = JOptionPane.showInputDialog("Fabricante:");
-                d.modelo = JOptionPane.showInputDialog("Modelo:");
-                d.microprocesador = JOptionPane.showInputDialog("Microprocesador:");
-                d.memoria = JOptionPane.showInputDialog("Memoria:");
-                d.tarjetaGrafica = JOptionPane.showInputDialog("Tarjeta gráfica:");
-                d.tamanoTorre = JOptionPane.showInputDialog("Tamaño de torre:");
-                d.capacidadDisco = JOptionPane.showInputDialog("Capacidad de disco:");
+                d.fabricante = solicitarTextoNoVacio("Fabricante:");
+                d.modelo = solicitarTextoNoVacio("Modelo:");
+                d.microprocesador = solicitarTextoNoVacio("Microprocesador:");
+                d.memoria = solicitarTextoNoVacio("Memoria:");
+                d.tarjetaGrafica = solicitarTextoNoVacio("Tarjeta gráfica:");
+                d.tamanoTorre = solicitarTextoNoVacio("Tamaño de torre:");
+                d.capacidadDisco = solicitarTextoNoVacio("Capacidad de disco:");
                 desktops.add(d);
                 break;
             }
@@ -81,18 +81,12 @@ public class App {
 
             }
             case 3: {
-                //Registrar tables ejemplo de como hacerlo (Acá toca validar si es capacitiva o resistiva con el enum de tipo de pantalla)
-//                Tablet t = new Tablet();
-//                t.fabricante = JOptionPane.showInputDialog("Fabricante:");
-//                t.modelo = JOptionPane.showInputDialog("Modelo:");
-//                t.microprocesador = JOptionPane.showInputDialog("Microprocesador:");
-
-                String Tabletfabricante = JOptionPane.showInputDialog("Fabricante:");
-                String Tabletmodelo = JOptionPane.showInputDialog("Modelo: ");
-                String Tabletmicroprocesador = JOptionPane.showInputDialog("Microprocesador:");
-                String Tabletmemoria = JOptionPane.showInputDialog("Memoria: ");
-                String tamanoMemoriaNAND = JOptionPane.showInputDialog("Tamanio de memoria NAND:");
-                String TabletTamanoDiagonal = JOptionPane.showInputDialog("Tamanio diagonal de la pantalla:");
+                String Tabletfabricante = solicitarTextoNoVacio("Fabricante:");
+                String Tabletmodelo = solicitarTextoNoVacio("Modelo: ");
+                String Tabletmicroprocesador = solicitarTextoNoVacio("Microprocesador:");
+                String Tabletmemoria = solicitarTextoNoVacio("Memoria: ");
+                String tamanoMemoriaNAND = solicitarTextoNoVacio("Tamanio de memoria NAND:");
+                String TabletTamanoDiagonal = solicitarTextoNoVacio("Tamanio diagonal de la pantalla:");
 
                 Object[] tiposPantalla = TipoPantalla.values();
                 TipoPantalla tipoPantalla = (TipoPantalla) JOptionPane.showInputDialog(null, "Seleccione tipo de pantalla: ", "Tipo de pantalla", JOptionPane.QUESTION_MESSAGE, null, tiposPantalla, tiposPantalla[0]);
@@ -153,8 +147,6 @@ public class App {
 
                 break;
             case 3:
-                //listar tablets
-
                 if(tablets.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "No hay tablets en la lista");
                 } else{
@@ -186,4 +178,18 @@ public class App {
             JOptionPane.showMessageDialog(null, sb.toString());
         }
     }
+
+
+    private static String solicitarTextoNoVacio(String mensaje) {
+        String input;
+        input = JOptionPane.showInputDialog(mensaje); // pedir valor
+        if (input == null) { // si presiona Cancelar
+            return  "No brindado"; // interrumpe el registro
+        }
+        if (input.trim().isEmpty()) { // si deja vacío o espacios
+            return  "No brindado";
+        }
+        return input; // devuelve valor válido
+    }
 }
+
