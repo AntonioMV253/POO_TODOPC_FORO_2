@@ -138,7 +138,6 @@ public class App {
                     break;
                 }
 
-                default:
                 JOptionPane.showMessageDialog(null, "Opción no válida");
         }
     }
@@ -187,20 +186,6 @@ public class App {
                             .append("Memoria: ").append(l.memoria).append("\n")
                             .append("Tamaño pantalla: ").append(l.tamanoPantalla).append("\n")
                             .append("Capacidad de disco: ").append(l.capacidadDisco).append("\n")
-                            .append("----------------------------\n");
-                }
-                break;
-
-            case 3:
-                sb.append("=== TABLETS ===\n");
-                for (Tablet t : tablets) {
-                    sb.append("Fabricante: ").append(t.fabricante).append("\n")
-                            .append("Modelo: ").append(t.modelo).append("\n")
-                            .append("Microprocesador: ").append(t.microprocesador).append("\n")
-                            .append("Tamaño diagonal: ").append(t.tamanoDiagonal).append("\n")
-                            .append("Tipo pantalla: ").append(t.tipoPantalla).append("\n")
-                            .append("Tamaño memoria NAND: ").append(t.tamanoMemoriaNAND).append("\n")
-                            .append("Sistema operativo: ").append(t.sistemaOperativo).append("\n")
                             .append("----------------------------\n");
                 }
                 break;
