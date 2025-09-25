@@ -79,15 +79,16 @@ public class App {
             }
             case 2: {
                 Laptop l = new Laptop();
-                l.fabricante = solicitarTextoNoVacio("Fabricante:");
-                l.modelo = solicitarTextoNoVacio("Modelo:");
-                l.microprocesador = solicitarTextoNoVacio("Microprocesador:");
-                l.memoria = solicitarTextoNoVacio("Memoria:");
-                l.tamanoPantalla = solicitarTextoNoVacio("Tamaño de pantalla:");
-                l.capacidadDisco = solicitarTextoNoVacio("Capacidad de disco:");
-                laptops.add(l);
-                JOptionPane.showMessageDialog(null, "Laptop registrada correctamente.");
-                break;
+                    l.fabricante = solicitarTextoNoVacio("Fabricante:");
+                    l.modelo = solicitarTextoNoVacio("Modelo:");
+                    l.microprocesador = solicitarTextoNoVacio("Microprocesador:");
+                    l.memoria = solicitarTextoNoVacio("Memoria:");
+                    l.tamanoPantalla = solicitarTextoNoVacio("Tamaño de pantalla:");
+                    l.capacidadDisco = solicitarTextoNoVacio("Capacidad de disco:");
+                    laptops.add(l);
+                    JOptionPane.showMessageDialog(null, "Laptop registrada correctamente.", "Registro Exitoso", JOptionPane.INFORMATION_MESSAGE);
+                    break;
+                }
             }
             case 3: {
                 String Tabletfabricante = solicitarTextoNoVacio("Fabricante:");
